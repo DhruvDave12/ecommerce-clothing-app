@@ -1,13 +1,27 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/homepage/homepage.component';
 
-function App() {
+const HatsPage = () => {
   return (
     <div> 
-        <HomePage />
+      <h1>HATS PAGE</h1>
     </div>
+  )
+}
+
+function App() {
+  return (
+    // Routes allow to render any first match.
+    // Gives more performance and more control over the code.
+
+    <Routes>
+      <Route  path="/" element={<HomePage />} />
+      <Route  path="/hats" element={<HatsPage />} />
+    </Routes>
+
   );
 }
 
