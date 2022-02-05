@@ -5,17 +5,19 @@ import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 
+import Header from './components/header/header.component';
 
 function App() {
   return (
     // Routes allow to render any first match.
     // Gives more performance and more control over the code.
-
-    <Routes>
-      <Route  path="/" element={<HomePage />} />
-      <Route  path="/shop" element={<ShopPage />} />
-    </Routes>
-
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+      </Routes>
+    </>
   );
 }
 
