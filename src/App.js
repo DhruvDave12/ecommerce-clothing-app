@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { connect } from 'react-redux';
@@ -50,17 +50,21 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/signin" element={<SignInAndSignUpPage />} />
+          <Route path="/signin" element={this.props.currentUser ? <HomePage /> : <SignInAndSignUpPage />} />
         </Routes>
       </>
     );
   }
 }
 
+// destructuring the user prop from the state from redux store
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+});
 // this function just helps in updating the redux store with the new firebase snapshot.
 const mapDispathToProps = dispatch => ({
   // we are setting the setCurrentUser prop as the function which expects a user and then dispatches that user to the action payload.
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispathToProps)(App);
+export default connect(mapStateToProps, mapDispathToProps)(App);

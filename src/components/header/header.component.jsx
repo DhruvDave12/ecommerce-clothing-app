@@ -7,9 +7,12 @@ import { connect } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
+
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
     return (
         <div className="header">
             <Link className="logo-container" to="/">
@@ -33,16 +36,20 @@ const Header = ({ currentUser }) => {
                             SIGN IN
                         </Link>
                 }
-
+                <CartIcon />
             </div>
+            {
+                hidden ? null : <CartDropDown />
+            }
         </div>
     )
 }
 
 // this is a function that goes as an argument in connect and helps to get data from the redux store
-const mapStateToProps = state => ({
+const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
     // currentUser at the right is the prop name that will be passed to the above component and right side is the data we are getting from the store.
-    currentUser: state.user.currentUser
+    currentUser,
+    hidden
 })
 
 // connect is method which simply connects the redux store to the react app.
