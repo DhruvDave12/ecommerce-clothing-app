@@ -9,9 +9,12 @@ import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component';
 
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
@@ -51,6 +54,7 @@ class App extends React.Component {
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/signin" element={this.props.currentUser ? <HomePage /> : <SignInAndSignUpPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </>
     );
@@ -58,8 +62,8 @@ class App extends React.Component {
 }
 
 // destructuring the user prop from the state from redux store
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 // this function just helps in updating the redux store with the new firebase snapshot.
 const mapDispathToProps = dispatch => ({

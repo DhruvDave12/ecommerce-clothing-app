@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 
 // this lets us modify items related to redux.
 import { connect } from 'react-redux';
-  
+
+import { createStructuredSelector } from "reselect";
+
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 
@@ -46,10 +51,15 @@ const Header = ({ currentUser, hidden }) => {
 }
 
 // this is a function that goes as an argument in connect and helps to get data from the redux store
-const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
+
+// createStructuredSelector instead of taking state and passing it we can simply jsut use createStructureSelector
+// and it will automatically pass the state.
+// just decreases the time for writing code.
+
+const mapStateToProps = createStructuredSelector({
     // currentUser at the right is the prop name that will be passed to the above component and right side is the data we are getting from the store.
-    currentUser,
-    hidden
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 })
 
 // connect is method which simply connects the redux store to the react app.
