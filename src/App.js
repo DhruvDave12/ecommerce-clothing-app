@@ -16,7 +16,8 @@ import Header from './components/header/header.component';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 import { setCurrentUser } from './redux/user/user.actions';
-
+import CollectionPage from './pages/collection/collection.component';
+// import { selectCollection } from './redux/shop/shop.selector';
 class App extends React.Component {
 
   unsubscibeFromAuth = null;
@@ -52,7 +53,11 @@ class App extends React.Component {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
+
+          <Route path="/shop" element={<ShopPage />}>
+              <Route path=":id" element={<CollectionPage />}/> 
+          </Route>
+
           <Route path="/signin" element={this.props.currentUser ? <HomePage /> : <SignInAndSignUpPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
