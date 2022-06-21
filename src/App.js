@@ -17,7 +17,7 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 import { setCurrentUser } from './redux/user/user.actions';
 import CollectionPage from './pages/collection/collection.component';
-// import { selectCollection } from './redux/shop/shop.selector';
+// import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 class App extends React.Component {
 
   unsubscibeFromAuth = null;
@@ -42,7 +42,10 @@ class App extends React.Component {
         });
       }
       // when user logs out we will set currentUser to null
-      this.setState({ currentUser: userAuth });
+      // this.setState({ currentUser: userAuth });
+      setCurrentUser(userAuth);
+      // we only need titles anditems
+     
     });
   }
   render() {
@@ -68,7 +71,7 @@ class App extends React.Component {
 
 // destructuring the user prop from the state from redux store
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 // this function just helps in updating the redux store with the new firebase snapshot.
 const mapDispathToProps = dispatch => ({

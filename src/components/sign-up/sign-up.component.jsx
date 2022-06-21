@@ -21,6 +21,7 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async event => {
+        console.log("I AM HERE");
         event.preventDefault();
         
         const { displayName, email, password, confirmPassword } = this.state;
@@ -64,28 +65,28 @@ class SignUp extends React.Component {
                         type="text"
                         name="displayName"
                         value={displayName}
-                        onChange={this.handleSubmit}
+                        onChange={this.handleChange}
                         label='Display Name'
                         required />
                     <FormInput
                         type="email"
                         name="email"
                         value={email}
-                        onChange={this.handleSubmit}
+                        onChange={this.handleChange}
                         label='Email'
                         required />
                     <FormInput
                         type="password"
                         name="password"
                         value={password}
-                        onChange={this.handleSubmit}
+                        onChange={this.handleChange}
                         label='Password'
                         required />
                     <FormInput
                         type="password"
                         name="confirmPassword"
                         value={confirmPassword}
-                        onChange={this.handleSubmit}
+                        onChange={this.handleChange}
                         label='Confirm Password'
                         required />
 

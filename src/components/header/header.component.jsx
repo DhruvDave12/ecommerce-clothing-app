@@ -15,38 +15,39 @@ import { auth } from '../../firebase/firebase.utils';
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
-import './header.styles.scss';
+// using styled components
+import { HeaderContainer, OptionsContainer, OptionLink, OptionDiv, LogoContainer } from "./header.styles";
 
 const Header = ({ currentUser, hidden }) => {
     return (
-        <div className="header">
-            <Link className="logo-container" to="/">
+        <HeaderContainer>
+            <LogoContainer to="/">
                 {/* Here comes our Logo */}
                 <Logo className='logo' />
 
-            </Link>
+            </LogoContainer>
 
-            <div className="options">
-                <Link className="option" to="/shop">
+            <OptionsContainer>
+                <OptionLink to="/shop">
                     SHOP
-                </Link>
-                <Link className="option" to="/shop">
+                </OptionLink>
+                <OptionLink to="/shop">
                     CONTACT
-                </Link>
+                </OptionLink>
                 {
                     currentUser ?
-                        <div className="option" style={{cursor:"pointer"}} onClick={() => auth.signOut()}>SIGN OUT</div>
+                        <OptionDiv onClick={() => auth.signOut()}>SIGN OUT</OptionDiv>
                         :
-                        <Link className="option" to="/signin">
+                        <OptionLink to="/signin">
                             SIGN IN
-                        </Link>
+                        </OptionLink>
                 }
                 <CartIcon />
-            </div>
+            </OptionsContainer>
             {
                 hidden ? null : <CartDropDown />
             }
-        </div>
+        </HeaderContainer>
     )
 }
 
